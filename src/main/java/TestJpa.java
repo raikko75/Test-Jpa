@@ -21,6 +21,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.metamodel.Metamodel;
 
+import modele.Livre;
+import service.DAOService;
+
+import service.IDaoService;
+
 public class TestJpa {
 
 	public static void main(String[] args) {
@@ -28,7 +33,12 @@ public class TestJpa {
 		EntityManagerFactory entityManagerFactory = new Persistence().createEntityManagerFactory("pu_essai");  //("pu_essai");
 		EntityManager entityManager = entityManagerFactory.createEntityManager(); 
 		
+		IDaoService ser = new DAOService(entityManager);
+		Livre l1 = ser.findById(1);
+		System.out.println(l1);
+		
 		
 	}
+	
 
 }
