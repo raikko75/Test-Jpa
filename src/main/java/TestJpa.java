@@ -21,6 +21,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.metamodel.Metamodel;
 
+import banque.Banque;
+import banque.Client;
+import banque.Compte;
+import banque.Operation;
+import modele.Emprunt;
 import modele.Livre;
 import service.DAOService;
 
@@ -30,15 +35,37 @@ public class TestJpa {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		EntityManagerFactory entityManagerFactory = new Persistence().createEntityManagerFactory("pu_essai");  //("pu_essai");
+		EntityManagerFactory entityManagerFactory = new Persistence().createEntityManagerFactory("pu_banque");  //("pu_essai");
 		EntityManager entityManager = entityManagerFactory.createEntityManager(); 
-		
+		Client c = new Client(); 
+		EntityTransaction enTr = entityManager.getTransaction();
+		enTr.begin();
+		entityManager.persist(c);
+
+		///////////////////////////////////////////////////
+
+		Banque b = new Banque(); 
+		entityManager.persist(b);
+
+		Compte cte = new Compte();
+		entityManager.persist(cte);
+
+		Operation op = new Operation();
+		entityManager.persist(op);
+		enTr.commit();
+		/*
 		IDaoService ser = new DAOService(entityManager);
 		Livre l1 = ser.findById(1);
-		System.out.println(l1);
-		
-		
+
+		Emprunt em = new Emprunt();
+		System.out.println(ser.findByLivres("YU").getEmprunt());
+		 */
+		//System.out.println(l1);
+
+
+
+
 	}
-	
+
 
 }
